@@ -1,0 +1,144 @@
+body, html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/*LISTE PARTIE*/
+.partie{
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+}
+
+.partie:nth-child(odd){
+    background: #717171;
+}
+
+.partie:nth-child(even){
+    background: #cacaca;
+}
+
+.choix-joueur{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: flex-end;
+}
+
+/*JEU*/
+#milieu{
+    height: 50px;
+    background: #222222;
+}
+
+#controle{
+    height: 200px;
+    background: #222222;
+    display: flex;
+}
+
+#controle > div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#controle-des{
+    flex-direction: column;
+}
+
+#des{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    margin-bottom: 5px;
+}
+
+.de-num{
+    width: 25px;
+    height: 25px;
+    margin: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#de-1{
+    border: solid 1px #ff0003;
+    color: #ff0003;
+}
+
+#de-2{
+    border: solid 1px #005aff;
+    color: #005aff;
+}
+
+#de-3{
+    border: solid 1px #40ff00;
+    color: #40ff00;
+}
+
+#controle-tour{
+
+}
+
+#adv{
+    background: #d2c0ff;
+    display: flex;
+}
+
+#adv > div{
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    border: solid 1px #717171;
+}
+
+#jou{
+    background: #D2C0FF;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#jou > div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid 1px #717171;
+}
+
+.carte{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.feu-adv, .feu-jou{
+    border: solid 1px #ff0003;
+}
+
+.terre-adv, .terre-jou{
+    border: solid 1px #40ff00;
+}
+
+.vent-adv, .vent-jou{
+    border: solid 1px #005aff;
+}
+
+.maitre-adv, .maitre-jou{
+    border: solid 1px #a8a100;
+}
+
+#choix{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}

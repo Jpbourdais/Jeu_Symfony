@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <a href="{{ path('all-parties')}}">Accueil</a>
+    </div>
+    <div id="adv">
+    {% for i in 11..1 %}
+        <div id="adv-{{ i }}">
+        {% for carte in terrainadv[i] %}
+            <div id="adv-{{ i }}-{{ carte['ID'] }}" class="{{ carte['ELEMENT'] == 1 ? 'feu-adv' }}{{ carte['ELEMENT'] == 2 ? 'vent-adv' }}{{ carte['ELEMENT'] == 3 ? 'terre-adv' }}{{ carte['ELEMENT'] == 4 ? 'maitre-adv' }} carte">
+                <p>{{ carte['ELEMENT'] == 1 ? 'Feu' }}{{ carte['ELEMENT'] == 2 ? 'Vent' }}{{ carte['ELEMENT'] == 3 ? 'Terre' }}{{ carte['ELEMENT'] == 4 ? 'Maitre' }} - {{ carte['FORCE']}}</p>
+            </div>
+        {% endfor %}
+        </div>
+    {% endfor %}
+    </div>
+    <div id="milieu">
+
+    </div>
+    <div id="jou">
+    {% for i in 11..1 %}
+        <div id="jou-{{ i }}">
+        {% set position = 0 %}
+        {% for carte in terrainjou[i] %}
+            {% set position = position + 1 %}
+            <div id="jou-{{ i }}-{{ carte['ID'] }}" class="{{ carte['ELEMENT'] == 1 ? 'feu-jou' }}{{ carte['ELEMENT'] == 2 ? 'vent-jou' }}{{ carte['ELEMENT'] == 3 ? 'terre-jou' }}{{ carte['ELEMENT'] == 4 ? 'maitre-jou' }} carte">
+                <div>
+                    <p>{{ carte['ELEMENT'] == 1 ? 'Feu' }}{{ carte['ELEMENT'] == 2 ? 'Vent' }}{{ carte['ELEMENT'] == 3 ? 'Terre' }}{{ carte['ELEMENT'] == 4 ? 'Maitre' }} - {{ carte['FORCE']}}</p>
+                </div>
+                {% if actions == 1 %}
+                    <div id="choix">
+                    {% if carte['ELEMENT'] == 4 %}
+                        <a href="{{ path('move-carte', {partieid: id, joueur: joueur, element: 1, force: carte['FORCE'], pile: i, position: position, maitre: 1}) }}"><button>Feu</button></a>
+                        <a href="{{ path('move-carte', {partieid: id, joueur: joueur, element: 2, force: carte['FORCE'], pile: i, position: position, maitre: 1}) }}"><button>Vent</button></a>
+                        <a href="{{ path('move-carte', {partieid: id, joueur: joueur, element: 3, force: carte['FORCE'], pile: i, position: position, maitre: 1}) }}"><button>Terre</button></a>
+                    {% else %}
+                        <a href="{{ path('move-carte', {partieid: id, joueur: joueur, element: carte['ELEMENT'], force: carte['FORCE'], pile: i, position: position, maitre: 0}) }}"><button>--></button></a>
+                    {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        </div>
+    {% endfor %}
+    </div>
+    <div id="controle">
+        <div id="controle-des">
+            <div id="des">
+                {% for u in 3..1 %}
+                    <div id="de-{{ u }}" class="de-num">
+                        {% if des[u] == 4 %}
+                            {% if u == 1 %}
+                                D
+                            {% elseif u == 2 %}
+                                E
+                            {% elseif u == 3 %}
+                                S
+                            {% endif %}
+                        {% elseif des[u] == 5 %}
+                            /
+                        {% else %}
+                            {{ des[u] }}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+                {% if actionsdes == 1 and actions == 1  %}
+                    <a href="{{ path('roll-des', {partieid: id, joueur: joueur}) }}"><button>Lancer les dés</button></a>
+                {% endif %}
+        </div>
+        <div id="controle-tour">
+            {% if actions == 1 %}
+                <a href="{{ path('end-tour', {partieid: id, joueur: joueur}) }}"><button>Finir le tour</button></a>
+            {% else %}
+                Ce n'est pas votre tour !
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+

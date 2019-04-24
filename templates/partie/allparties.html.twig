@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div>
+        <h1>Toutes les parties</h1>
+        {% for partie in parties %}
+            <div class="partie">
+                <h2>{{ partie.PartieNom }}</h2>
+                {% if partie.PartieStatus == 1 %}
+                    <p>Au tour du joueur {{ partie.partieTour }}</p>
+                {% else %}
+                    <p>Partie terminée</p>
+                {% endif %}
+                <div class="choix-joueur">
+                    <a href="{{ path('show-partie', {partieid: partie.Id, joueur: 1}) }}"><button>Joueur 1</button></a>
+                    <a href="{{ path('show-partie', {partieid: partie.Id, joueur: 2}) }}"><button>Joueur 2</button></a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+    {{ form_start(formpartie, {'attr': {'action' : 'add-partie'}}) }}
+    {{ form_row(formpartie.nom) }}
+    {{ form_row(formpartie.envoyer) }}
+    {{ form_end(formpartie) }}
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
